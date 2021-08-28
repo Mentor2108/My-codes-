@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Calendar</title>
+        <link rel="stylesheet" href="TD-2.css">
+        <!-- <link href="https://fontawesome.com/v4.7/icon/trash"> -->
+    </head>
+    <body>
+      <p class="desc">
+        Select date to add a task:
+      </p>
+        <span id='ct' style="font-size:15px;padding-top: 2vh;"></span>
+        <div class="container">
+            
+            <div class="calendar">
+              <div class="front">
+                <div class="current-date">
+                    <h1 id="month"></h1>
+                    <h1 id="day"></h1>
+                </div>  
+
+                <div class="current-month">
+                  <ul class="week-days">
+                    <li>MON</li>
+                    <li>TUE</li>
+                    <li>WED</li>
+                    <li>THU</li>
+                    <li>FRI</li>
+                    <li>SAT</li>
+                    <li>SUN</li>
+                  </ul>
+      
+                  <div class="weeks">
+                    <div class="first">
+                      <span class="last-month">26</span>
+                      <span class="last-month">27</span>
+                      <span class="last-month">28</span>
+                      <span class="last-month">29</span>
+                      <span class="last-month">30</span>
+                      <span class="last-month">31</span>
+                      <span>01</span>
+                    </div>
+      
+                    <div class="second">
+                      <span>02</span>
+                      <span>03</span>
+                      <span>04</span>
+                      <span>05</span>
+                      <span>06</span>
+                      <span>07</span>
+                      <span>08</span>
+                    </div>
+      
+                    <div class="third">
+                      <span>09</span>
+                      <span>10</span>
+                      <span>11</span>
+                      <span>12</span>
+                      <span>13</span>
+                      <span>14</span>
+                      <span>15</span>
+                    </div>
+      
+                    <div class="fourth">
+                      <span>16</span>
+                      <span>17</span>
+                      <span>18</span>
+                      <span>19</span>
+                      <span>20</span>
+                      <span>21</span>
+                      <span>22</span>
+                    </div>
+      
+                    <div class="fifth">
+                      <span>23</span>
+                      <span>24</span>
+                      <span>25</span>
+                      <span>26</span>
+                      <span>27</span>
+                      <span>28</span>
+                      <span>29</span>
+                    </div>
+
+                    <div class="sixth">
+                        <span>30</span>
+                        <span>31</span>
+                        <span class="next-month">01</span>
+                        <span class="next-month">02</span>
+                        <span class="next-month">03</span>
+                        <span class="next-month">04</span>
+                        <span class="next-month">05</span>
+                    </div>
+                  </div>
+                </div>
+              </div>    
+
+              <div class="back">
+                <div class="actions">
+                  <button id="save">
+                    SAVE ✔
+                    </button>
+                  <button id="delete">
+                    DELETE ALL ✖
+                  </button>
+                </div>
+                <input type="text"id="title" placeholder="Add a task">
+                <input type="time" id="time" placeholder="Add a time">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="TD-2.js"></script>   
+                <script>
+                  const time=document.getElementById("time");
+                  const save=document.getElementById("save");
+                  const title=document.getElementById("title");
+                  const tasksop=document.getElementById("tasksop");
+                  
+                  save.onclick=function(){
+                    const key= title.value;
+                    const value=time.value;
+                    // console.log(key);
+                    // console.log(value);
+
+                    if(key && value){
+                      localStorage.setItem(key,value); 
+                      location.reload();
+                    }
+                  };
+
+                  for(let i=0;i<localStorage.length;i++){
+                    const key=localStorage.key(i);
+                    const value=localStorage.getItem(key);
+
+                    tasksop.innerHTML += `${key}:${value}<br />`;
+                  }
+                </script>
+              </div>    
+    </body>
+</html>

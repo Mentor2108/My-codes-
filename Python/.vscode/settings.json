@@ -1,0 +1,7 @@
+{
+    "editor.defaultFormatter": "ms-toolsai.jupyter",
+    "editor.mouseWheelZoom": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    }
+}
