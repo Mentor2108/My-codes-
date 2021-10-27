@@ -1,23 +1,23 @@
 Case #1: IS = D 
 D 
-IS = D 
-D 
-IS = D 
-D 
-IS = D 
-D 
-IS = D 
-D 
-IS = D 
-D 
-IS = D 
-D 
-IS = D 
-D 
-IS = D 
-D 
-IS = D 
-D 
-IS = D 
-D 
+IS = 
+
+IS = 
+
+IS = 
+
+IS = 
+
+IS = 
+
+IS = 
+
+IS = 
+
+IS = 
+
+IS = 
+
+IS = 
+
 

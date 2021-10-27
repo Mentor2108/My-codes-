@@ -9,19 +9,19 @@ using namespace std;
 //Multiples of 3 and 5 upto n (1000)
 void solve()
 {
-    int n = 1000;
+    int n = 1000000000;
     // cin>>n;
 
     ll ans = 0;
-    for (int i = 3; i<1000; i+=3)
+    for (int i = 3; i<n; i+=3)
     {
         ans = ans + i;
     }
-    for (int i = 5; i<1000; i+=5)
+    for (int i = 5; i<n; i+=5)
     {
         ans = ans + i;
     }
-    for (int i = 15; i<1000; i+=15)
+    for (int i = 15; i<n; i+=15)
     {
         ans = ans - i;
     }

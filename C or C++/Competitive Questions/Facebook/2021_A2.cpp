@@ -26,6 +26,9 @@ void solve()
     set <char> s;
     set <char> s1;
     vector <char> IS; 
+
+    void dfs ()
+
     for (int i = 0; i < 26; i ++)
     {
         // p[i].push_back('A'+i);
@@ -42,6 +45,7 @@ void solve()
     {
         for (int j = 0; j<p[a[i] - 65].size(); j++)
         {
+            dfs()
             s1.insert(p[a[i] - 65][j]);
         }
         set_intersection(s1.begin(),s1.end(),s.begin(),s.end(), back_inserter(IS));
@@ -49,6 +53,7 @@ void solve()
         for (int i = 0; i<IS.size(); i++)
             cout<<IS[i]<<" ";
         cout<<"\n";
+        s1.clear();
         s.clear();
         for (int i = 0; i<IS.size(); i++)
             s.insert(IS[i]);
