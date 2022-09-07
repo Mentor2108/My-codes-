@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-//I need to work on this
+
 #define ll long long int
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a > b ? b : a)
@@ -16,7 +16,7 @@
 #define VPII vector<pair<int, int>>
 
 //const int N = ;
-
+int root = 0, pos = 0;
 using namespace std;
 
 void Mentor()
@@ -59,68 +59,48 @@ void FindPrime(bool* prime, int N) {
     }
 }
 
-int findans(VI pos, VI val, int x, int y, int n, int d)
+VI FindPath(vector<vector<int>> tree, int curr, int max_size, vector<vector<int>> &ans)
 {
-    cout<<"min = "<<x<<" "<<y<<endl;
-    int z;
-    if (pos[n-1] == n)
-        z = 0;
-    else
-        z = d-pos[n-1]-1;
-    if (y == n-1)
+    VI vec;
+    int l = tree[curr].size();
+    for(int i = 1; i < l; i++)
     {
-        z = d-pos[n-2] - 1;
-        val[y] = z;
+        vec = FindPath(tree, tree[curr][i], max_size+1, ans);
     }
-    else if (y>0)
-        val[y] = pos[y+1] - pos[y-1] - 1;
-    else 
-    {
-        val[y] = val[1]-1;
-    }
-    int temp = *max_element(val.begin(), val.end())/2;
-    temp = max(temp, z);
-    int ans = min(*min_element(val.begin(), val.end()), temp);
-    return ans;
+    vec.PB(curr);
+    return vec;
 }
 
 void solve()
 {
-    int n, d;
-    cin>>n>>d;
-    VI pos(n);
-    VI val(n);
-    int y = 0;
-    ll x = INT_MAX;
-    FOR(i, n, 1)
+    int n;
+    cin>>n;
+    VI par(n+1, 0);
+    vector<vector<int>> tree(n+1);
+    vector<vector<int>> ans(n+1);
+    for(int i = 1; i <= n;i++)
     {
-        cin>>pos[i];
-        if (i>0)
+        cin>>par[i];
+        if (par[i] == i)
         {
-            val[i] = pos[i] - pos[i-1] - 1;
-            if (x>val[i])
-            {
-                x = val[i];
-                y = i;
-            }
+            tree[i].insert(tree[i].begin(), 0);
+            root = i;
+            continue;
         }
+        tree[i].PB(par[i]);
+        tree[par[i]].PB(i);
     }
-    val[0] = pos[0] - 1;
-    if (x > val[0])
+    for(int i = 1; i<=n; i++)
     {
-        x = val[0];
-        y = 0;
-    }    
-    int ans = -1;
-    for(int i = 0; i < n; i++)
-    {
-        cout<<"i: "<<i<<endl;
-        if (val[i] == x)
+        for(int j = 0; j<tree[i].size(); j++)
         {
-            ans = max(findans(pos, val, x, i, n, d), ans);
+            cout<<tree[i][j]<<" ";
         }
+        cout<<endl;
     }
-    cout<<ans<<endl;
+    cout<<endl;
+    root = 0;
+    pos = 0;
 }
 
 void TestCase()

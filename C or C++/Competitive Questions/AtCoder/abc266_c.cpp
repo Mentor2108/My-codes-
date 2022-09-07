@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-//I need to work on this
+
 #define ll long long int
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a > b ? b : a)
@@ -59,68 +59,35 @@ void FindPrime(bool* prime, int N) {
     }
 }
 
-int findans(VI pos, VI val, int x, int y, int n, int d)
-{
-    cout<<"min = "<<x<<" "<<y<<endl;
-    int z;
-    if (pos[n-1] == n)
-        z = 0;
-    else
-        z = d-pos[n-1]-1;
-    if (y == n-1)
-    {
-        z = d-pos[n-2] - 1;
-        val[y] = z;
-    }
-    else if (y>0)
-        val[y] = pos[y+1] - pos[y-1] - 1;
-    else 
-    {
-        val[y] = val[1]-1;
-    }
-    int temp = *max_element(val.begin(), val.end())/2;
-    temp = max(temp, z);
-    int ans = min(*min_element(val.begin(), val.end()), temp);
-    return ans;
-}
-
 void solve()
 {
-    int n, d;
-    cin>>n>>d;
-    VI pos(n);
-    VI val(n);
-    int y = 0;
-    ll x = INT_MAX;
-    FOR(i, n, 1)
+    vector<pair<double, double>> n(4);
+    for (int i = 0; i < 4;i++)
     {
-        cin>>pos[i];
-        if (i>0)
+        cin>>n[i].F>>n[i].S;
+    }
+    for (int i = 0; i < 4;i++)
+    {
+        double temp1 = (n[i].S - n[(i+1)%4].S)/(n[i].F - n[(i+1)%4].F);
+        double temp2 = (n[(i+1)%4].S - n[(i+2)%4].S)/(n[(i+1)%4].F - n[(i+2)%4].F);
+        // double temp = (n[0].F)/(n[0].S);
+        double x = 180.0/M_PI;
+        double ang1 = abs(atan(temp1)*x);
+        double ang2 = abs(atan(temp2)*x);
+        double angle = abs(ang1 - ang2);
+        cout<<ang1 << " "<<ang2<<endl;
+        if (angle<0)
         {
-            val[i] = pos[i] - pos[i-1] - 1;
-            if (x>val[i])
-            {
-                x = val[i];
-                y = i;
-            }
+            angle = 360+angle;
+        }
+        cout<<angle<<endl;
+        if (angle >=180)
+        {
+            cout<<"No";
+            return;
         }
     }
-    val[0] = pos[0] - 1;
-    if (x > val[0])
-    {
-        x = val[0];
-        y = 0;
-    }    
-    int ans = -1;
-    for(int i = 0; i < n; i++)
-    {
-        cout<<"i: "<<i<<endl;
-        if (val[i] == x)
-        {
-            ans = max(findans(pos, val, x, i, n, d), ans);
-        }
-    }
-    cout<<ans<<endl;
+    cout<<"Yes";
 }
 
 void TestCase()
@@ -137,7 +104,7 @@ int main()
     YOURMENTOR
     //bool prime[N];
     //FindPrime(prime, N);
-    TestCase();
-    //solve();
+    // TestCase();
+    solve();
     return 0;
 }

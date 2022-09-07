@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
-//I need to work on this
+
 #define ll long long int
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a > b ? b : a)
 #define mod 1000000007
-
+//I dont know implementation    
 #define YOURMENTOR ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
 #define FOR(i, n, k) for(int i = 0; i<n; i+=k)
 #define endl "\n"
@@ -59,68 +59,69 @@ void FindPrime(bool* prime, int N) {
     }
 }
 
-int findans(VI pos, VI val, int x, int y, int n, int d)
-{
-    cout<<"min = "<<x<<" "<<y<<endl;
-    int z;
-    if (pos[n-1] == n)
-        z = 0;
-    else
-        z = d-pos[n-1]-1;
-    if (y == n-1)
-    {
-        z = d-pos[n-2] - 1;
-        val[y] = z;
-    }
-    else if (y>0)
-        val[y] = pos[y+1] - pos[y-1] - 1;
-    else 
-    {
-        val[y] = val[1]-1;
-    }
-    int temp = *max_element(val.begin(), val.end())/2;
-    temp = max(temp, z);
-    int ans = min(*min_element(val.begin(), val.end()), temp);
-    return ans;
-}
-
 void solve()
 {
-    int n, d;
-    cin>>n>>d;
-    VI pos(n);
-    VI val(n);
-    int y = 0;
-    ll x = INT_MAX;
-    FOR(i, n, 1)
-    {
-        cin>>pos[i];
-        if (i>0)
-        {
-            val[i] = pos[i] - pos[i-1] - 1;
-            if (x>val[i])
-            {
-                x = val[i];
-                y = i;
-            }
-        }
-    }
-    val[0] = pos[0] - 1;
-    if (x > val[0])
-    {
-        x = val[0];
-        y = 0;
-    }    
-    int ans = -1;
+    int m, n;
+    cin>>n>>m;
+    VI vec(n);
+    VPII streak(m);
+    map<int, int> mp;
+    vector<long> presum(n+1, 0), postsum(n+1, 0);
+    ll ans = 0;
     for(int i = 0; i < n; i++)
     {
-        cout<<"i: "<<i<<endl;
-        if (val[i] == x)
-        {
-            ans = max(findans(pos, val, x, i, n, d), ans);
-        }
+        cin>>vec[i];
     }
-    cout<<ans<<endl;
+    for(int i = 0; i < m; i++)
+    {
+        int a, b;
+        cin>>a>>b;
+        streak[i].F = a;
+        streak[i].S = b;
+        mp[a] = b;
+    }
+
+    vector dp(n+1, vector<ll>(n+1, 0));
+/* 9
+    presum[1] = mp[1];
+    for(int i = 2; i<=n; i++)
+    {
+        presum[i] = presum[i-1] + mp[i];
+    }
+
+    postsum[n] = mp[n];
+    for(int i = n-1; i>0; i--)
+    {
+        postsum[i] = postsum[i+1] + mp[i];
+    }
+    int s = 0;
+    for(int i = 0; i < n; i++)
+    {
+        int max_s1 = min(streak[m-1].F-s, n-i);
+        // cout<<"max_s1 = "<<max_s1<<endl;
+        // cout<<presum[max_s1]<<" "<<postsum[max_s1]<<" "<<vec[i]<<endl;
+        if (m == 1)
+        {
+            if (s==streak[0].F)
+            {
+                if (presum[])
+            }
+        }
+        if (( (ll)presum[max_s1] >=((ll)postsum[max_s1] + (ll)vec[i])) && s!=0)
+        {
+            // cout<<"fail = "<<i<<endl;
+            s = 0;
+        }
+        else
+        {
+            cout<<i<<endl;
+            s++;
+            ans+=(vec[i] + mp[s]);
+        }
+        // cout<<"s = "<<s<<endl;
+        // ans+=max(presum[max_s1], postsum[max_s1]+vec[i]);
+    }
+    cout<<ans; */
 }
 
 void TestCase()
@@ -137,7 +138,7 @@ int main()
     YOURMENTOR
     //bool prime[N];
     //FindPrime(prime, N);
-    TestCase();
-    //solve();
+    // TestCase();
+    solve();
     return 0;
 }

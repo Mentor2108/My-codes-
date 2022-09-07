@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-//I need to work on this
+
 #define ll long long int
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a > b ? b : a)
@@ -59,68 +59,39 @@ void FindPrime(bool* prime, int N) {
     }
 }
 
-int findans(VI pos, VI val, int x, int y, int n, int d)
-{
-    cout<<"min = "<<x<<" "<<y<<endl;
-    int z;
-    if (pos[n-1] == n)
-        z = 0;
-    else
-        z = d-pos[n-1]-1;
-    if (y == n-1)
-    {
-        z = d-pos[n-2] - 1;
-        val[y] = z;
-    }
-    else if (y>0)
-        val[y] = pos[y+1] - pos[y-1] - 1;
-    else 
-    {
-        val[y] = val[1]-1;
-    }
-    int temp = *max_element(val.begin(), val.end())/2;
-    temp = max(temp, z);
-    int ans = min(*min_element(val.begin(), val.end()), temp);
-    return ans;
-}
-
 void solve()
 {
-    int n, d;
-    cin>>n>>d;
-    VI pos(n);
-    VI val(n);
-    int y = 0;
-    ll x = INT_MAX;
-    FOR(i, n, 1)
+    int a,b,c,x,y;
+    cin>>a>>b>>c>>x>>y;
+    x-=a;
+    int flag = 0;
+    if (x>0)
     {
-        cin>>pos[i];
-        if (i>0)
+        if (c-x>=0)
         {
-            val[i] = pos[i] - pos[i-1] - 1;
-            if (x>val[i])
-            {
-                x = val[i];
-                y = i;
-            }
+            c-=x;
+            flag = 1;
+        }
+        else 
+        {
+            cout<<"NO\n";
+            return;
         }
     }
-    val[0] = pos[0] - 1;
-    if (x > val[0])
+    y-=b;
+    if (y>0)
     {
-        x = val[0];
-        y = 0;
-    }    
-    int ans = -1;
-    for(int i = 0; i < n; i++)
-    {
-        cout<<"i: "<<i<<endl;
-        if (val[i] == x)
+        if (c-y>=0)
         {
-            ans = max(findans(pos, val, x, i, n, d), ans);
+            c-=y;
+        }
+        else 
+        {
+            cout<<"NO\n";
+            return;
         }
     }
-    cout<<ans<<endl;
+    cout<<"YES\n";
 }
 
 void TestCase()

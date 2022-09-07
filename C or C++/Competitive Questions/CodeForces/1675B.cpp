@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-//I need to work on this
+
 #define ll long long int
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a > b ? b : a)
@@ -16,6 +16,7 @@
 #define VPII vector<pair<int, int>>
 
 //const int N = ;
+int x[31] = {};
 
 using namespace std;
 
@@ -59,68 +60,30 @@ void FindPrime(bool* prime, int N) {
     }
 }
 
-int findans(VI pos, VI val, int x, int y, int n, int d)
-{
-    cout<<"min = "<<x<<" "<<y<<endl;
-    int z;
-    if (pos[n-1] == n)
-        z = 0;
-    else
-        z = d-pos[n-1]-1;
-    if (y == n-1)
-    {
-        z = d-pos[n-2] - 1;
-        val[y] = z;
-    }
-    else if (y>0)
-        val[y] = pos[y+1] - pos[y-1] - 1;
-    else 
-    {
-        val[y] = val[1]-1;
-    }
-    int temp = *max_element(val.begin(), val.end())/2;
-    temp = max(temp, z);
-    int ans = min(*min_element(val.begin(), val.end()), temp);
-    return ans;
-}
-
 void solve()
 {
-    int n, d;
-    cin>>n>>d;
-    VI pos(n);
-    VI val(n);
-    int y = 0;
-    ll x = INT_MAX;
+    int n;
+    cin>>n;
+    int a[n];
     FOR(i, n, 1)
     {
-        cin>>pos[i];
-        if (i>0)
+        cin>>a[i];
+    }
+    int ans = 0;
+    for(int i = n-2; i>=0; i--)
+    {
+        while(a[i]>=a[i+1] && a[i] != 0)
         {
-            val[i] = pos[i] - pos[i-1] - 1;
-            if (x>val[i])
-            {
-                x = val[i];
-                y = i;
-            }
+            a[i]/=2;
+            ans++;
+        }
+        if (a[i] == a[i+1] && a[i] == 0)
+        {
+            cout<<"-1\n";
+            return;
         }
     }
-    val[0] = pos[0] - 1;
-    if (x > val[0])
-    {
-        x = val[0];
-        y = 0;
-    }    
-    int ans = -1;
-    for(int i = 0; i < n; i++)
-    {
-        cout<<"i: "<<i<<endl;
-        if (val[i] == x)
-        {
-            ans = max(findans(pos, val, x, i, n, d), ans);
-        }
-    }
-    cout<<ans<<endl;
+    cout<<ans<<"\n";
 }
 
 void TestCase()
@@ -137,6 +100,12 @@ int main()
     YOURMENTOR
     //bool prime[N];
     //FindPrime(prime, N);
+    // x[0] = 1;
+    // x[1] = 2;
+    // for(int i = 2; i < 31; i++)
+    // {
+    //     x[i] = x[i-1]*2;
+    // }
     TestCase();
     //solve();
     return 0;

@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-//I need to work on this
+
 #define ll long long int
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a > b ? b : a)
@@ -59,68 +59,74 @@ void FindPrime(bool* prime, int N) {
     }
 }
 
-int findans(VI pos, VI val, int x, int y, int n, int d)
-{
-    cout<<"min = "<<x<<" "<<y<<endl;
-    int z;
-    if (pos[n-1] == n)
-        z = 0;
-    else
-        z = d-pos[n-1]-1;
-    if (y == n-1)
-    {
-        z = d-pos[n-2] - 1;
-        val[y] = z;
-    }
-    else if (y>0)
-        val[y] = pos[y+1] - pos[y-1] - 1;
-    else 
-    {
-        val[y] = val[1]-1;
-    }
-    int temp = *max_element(val.begin(), val.end())/2;
-    temp = max(temp, z);
-    int ans = min(*min_element(val.begin(), val.end()), temp);
-    return ans;
-}
-
 void solve()
 {
-    int n, d;
-    cin>>n>>d;
-    VI pos(n);
-    VI val(n);
-    int y = 0;
-    ll x = INT_MAX;
-    FOR(i, n, 1)
+    int n, k, z = 1;
+    cin>>n>>k;
+    VI p(n+1), top(n+1, 0), len(n+1, 0), final(n+1, -1);
+    vector<vector<int>> ans(n+1);
+    if (k==1)
     {
-        cin>>pos[i];
-        if (i>0)
+        for(int i =1; i<=n;i++)
         {
-            val[i] = pos[i] - pos[i-1] - 1;
-            if (x>val[i])
+            cin>>p[i];
+            cout<<i<<endl;
+        }
+        return;
+    }
+    for(int i = 1; i<=n; i++)
+    {
+        int m = n+2, mp = -1;
+        cin>>p[i];
+        if (i == 1)
+        {
+            len[z] = 1;
+            top[z]=p[i];
+            ans[z++].PB(p[i]);
+        }    
+        else 
+        {
+            for(int j = 1; j<=z; j++)
             {
-                x = val[i];
-                y = i;
+                if (top[j] > p[i])
+                {
+                    if (m>top[j])
+                    {
+                        m = top[j];
+                        mp = j;
+                    }
+                }
+            }
+            if (m==n+2)
+            {
+                len[z] = 1;
+                top[z] = p[i];
+                ans[z++].PB(p[i]);
+            }
+            else
+            {
+                ans[mp].PB(p[i]);
+                top[mp] = p[i];
+                len[mp]++;
+            }
+        }
+        if (m!=n+2)
+        {
+            if (len[mp] == k)
+            {
+                for(int j = 0; j<ans[mp].size(); j++)
+                {
+                    final[ans[mp][j]] = i;
+                }
+                top[mp] = -1;
+                len[mp] = -1;
             }
         }
     }
-    val[0] = pos[0] - 1;
-    if (x > val[0])
+    for(int i = 1; i<=n; i++)
     {
-        x = val[0];
-        y = 0;
-    }    
-    int ans = -1;
-    for(int i = 0; i < n; i++)
-    {
-        cout<<"i: "<<i<<endl;
-        if (val[i] == x)
-        {
-            ans = max(findans(pos, val, x, i, n, d), ans);
-        }
+        cout<<final[i]<<endl;
     }
-    cout<<ans<<endl;
 }
 
 void TestCase()
@@ -137,7 +143,7 @@ int main()
     YOURMENTOR
     //bool prime[N];
     //FindPrime(prime, N);
-    TestCase();
-    //solve();
+    // TestCase();
+    solve();
     return 0;
 }

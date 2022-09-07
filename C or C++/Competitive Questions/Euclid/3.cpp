@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-//I need to work on this
+
 #define ll long long int
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a > b ? b : a)
@@ -59,68 +59,56 @@ void FindPrime(bool* prime, int N) {
     }
 }
 
-int findans(VI pos, VI val, int x, int y, int n, int d)
-{
-    cout<<"min = "<<x<<" "<<y<<endl;
-    int z;
-    if (pos[n-1] == n)
-        z = 0;
-    else
-        z = d-pos[n-1]-1;
-    if (y == n-1)
-    {
-        z = d-pos[n-2] - 1;
-        val[y] = z;
-    }
-    else if (y>0)
-        val[y] = pos[y+1] - pos[y-1] - 1;
-    else 
-    {
-        val[y] = val[1]-1;
-    }
-    int temp = *max_element(val.begin(), val.end())/2;
-    temp = max(temp, z);
-    int ans = min(*min_element(val.begin(), val.end()), temp);
-    return ans;
-}
-
 void solve()
 {
-    int n, d;
-    cin>>n>>d;
-    VI pos(n);
-    VI val(n);
-    int y = 0;
-    ll x = INT_MAX;
+    int n, m;
+    cin>>n>>m;
+    VI vec1(n), vec2(m);
+    ll diff = 0;
     FOR(i, n, 1)
     {
-        cin>>pos[i];
-        if (i>0)
-        {
-            val[i] = pos[i] - pos[i-1] - 1;
-            if (x>val[i])
-            {
-                x = val[i];
-                y = i;
-            }
-        }
+        cin>>vec1[i];
+        diff+=vec1[i];
     }
-    val[0] = pos[0] - 1;
-    if (x > val[0])
+    FOR(i, m, 1)
     {
-        x = val[0];
-        y = 0;
-    }    
-    int ans = -1;
-    for(int i = 0; i < n; i++)
-    {
-        cout<<"i: "<<i<<endl;
-        if (val[i] == x)
-        {
-            ans = max(findans(pos, val, x, i, n, d), ans);
-        }
+        cin>>vec2[i];
+        diff-=vec2[i];
     }
-    cout<<ans<<endl;
+    if (diff>0)
+    {
+        cout<<0;
+        return;
+    }
+    sort(vec1.begin(), vec1.end());
+    sort(vec2.begin(), vec2.end());
+    ll ans = 0, i = 0;
+    while(1)
+    {
+        if (diff > 0)
+        {
+            cout<<ans;
+            return;
+        }
+        if (vec1[i]>=vec2[m-i-1])
+        {
+            cout<<-1;
+            return;
+        } 
+        if (diff == 0)
+        {
+            // diff = diff + vec2[m-i-1] - vec1[i];
+            cout<<ans+1;
+            return; 
+        }
+        else 
+        {
+            diff = diff + 2*(vec2[m-i-1] - vec1[i]);
+        }
+        i++;
+        ans++;
+        // cout<<"i = "<<i<<endl;
+    }
 }
 
 void TestCase()
@@ -133,11 +121,11 @@ void TestCase()
 
 int main()
 {
-    Mentor();
+    // Mentor();
     YOURMENTOR
     //bool prime[N];
     //FindPrime(prime, N);
-    TestCase();
-    //solve();
+    // TestCase();
+    solve();
     return 0;
 }

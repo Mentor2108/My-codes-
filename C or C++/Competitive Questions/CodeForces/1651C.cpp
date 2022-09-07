@@ -1,14 +1,19 @@
 #include <bits/stdc++.h>
 
 #define ll long long int
-// #define max(a, b) (a > b ? a : b)
-// #define min(a, b) (a > b ? b : a)
+#define max(a, b) (a > b ? a : b)
+#define min(a, b) (a > b ? b : a)
 #define mod 1000000007
-
+// Do later
 #define YOURMENTOR ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
 #define FOR(i, n, k) for(int i = 0; i<n; i+=k)
 #define endl "\n"
 #define PB push_back
+#define F first
+#define S second
+#define VI vector<int>
+#define PII pair<int, int>
+#define VPII vector<pair<int, int>>
 
 //const int N = ;
 
@@ -33,7 +38,7 @@ ll Fastpow(ll base, ll pow) {
     return res * res;
 }
 
-void FindPrime(int* prime, int N) {
+void FindPrime(bool* prime, int N) {
     for (int i = 1; i <= N; i++) {
         prime[i] = 1;
     }
@@ -56,36 +61,10 @@ void FindPrime(int* prime, int N) {
 
 void solve()
 {
-    //int prime[N];
-    //FindPrime(prime, N);
     int n;
     cin>>n;
-    pair<int, int> one, two;
-    vector<int> vec1(n), vec2(n);
-    FOR(i, n, 1)
-    {
-        cin>>vec1[i];
-    }
-    one = {vec1[0], vec1[n-1]};
-    FOR(i, n, 1)
-    {
-        cin>>vec2[i];
-    }
-    two = {vec2[0], vec2[n-1]};
-    sort(vec1.begin(), vec1.end());
-    sort(vec2.begin(), vec2.end());
-    ll ans = 0;
-    if(vec1[0] == one.first)
-    {
-        if (vec1[n-1] == one.second)
-        {
-            
-        }
-    }
-    else if (vec1[0] == one.second)
-    {
-        
-    }
+    VI a(n), b(n);
+
 }
 
 void TestCase()
@@ -100,6 +79,8 @@ int main()
 {
     Mentor();
     YOURMENTOR
+    //bool prime[N];
+    //FindPrime(prime, N);
     TestCase();
     //solve();
     return 0;

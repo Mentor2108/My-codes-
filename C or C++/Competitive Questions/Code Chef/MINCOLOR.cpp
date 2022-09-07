@@ -65,10 +65,10 @@ void solve()
     int a[n+1][m+1] = {};
     a[x1][y1] = 1;
     a[x2][y2] = 2;
-    if(x1<x2)
-    {
-        if (y1<y2)
-    }
+    // if(x1<x2)
+    // {
+    //     if (y1<y2)
+    // }
 }
 
 void TestCase()
