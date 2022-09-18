@@ -1,1 +1,13 @@
+<<<<<<< HEAD
 hi
+=======
+0 nan
+nan
+nan nan
+nan
+nan 0
+nan
+0 0
+0
+Yes
+>>>>>>> 23e2a66b5f5f6b85b57e24db2525e7c7527e8495
