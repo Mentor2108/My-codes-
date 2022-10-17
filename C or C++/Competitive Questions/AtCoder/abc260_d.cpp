@@ -61,72 +61,23 @@ void FindPrime(bool* prime, int N) {
 
 void solve()
 {
-    int n, k, z = 1;
+    int n, k;
     cin>>n>>k;
-    VI p(n+1), top(n+1, 0), len(n+1, 0), final(n+1, -1);
-    vector<vector<int>> ans(n+1);
-    if (k==1)
+    VI card(n);
+    set<PII> p;
+    vector<vector<int>> current;
+    vector<int> ans(n+1, -1);
+    for(int i = 0; i<n; i++)
     {
-        for(int i =1; i<=n;i++)
-        {
-            cin>>p[i];
-            cout<<i<<endl;
-        }
-        return;
+        cin>>card[i];
     }
-    for(int i = 1; i<=n; i++)
+    FOR(i, n, 1)
     {
-        int m = n+2, mp = -1;
-        cin>>p[i];
-        if (i == 1)
-        {
-            len[z] = 1;
-            top[z]=p[i];
-            ans[z++].PB(p[i]);
-        }    
-        else 
-        {
-            for(int j = 1; j<=z; j++)
-            {
-                if (top[j] > p[i])
-                {
-                    if (m>top[j])
-                    {
-                        m = top[j];
-                        mp = j;
-                    }
-                }
-            }
-            if (m==n+2)
-            {
-                len[z] = 1;
-                top[z] = p[i];
-                ans[z++].PB(p[i]);
-            }
-            else
-            {
-                ans[mp].PB(p[i]);
-                top[mp] = p[i];
-                len[mp]++;
-            }
-        }
-        if (m!=n+2)
-        {
-            if (len[mp] == k)
-            {
-                for(int j = 0; j<ans[mp].size(); j++)
-                {
-                    final[ans[mp][j]] = i;
-                }
-                top[mp] = -1;
-                len[mp] = -1;
-            }
-        }
+        
     }
-    for(int i = 1; i<=n; i++)
-    {
-        cout<<final[i]<<endl;
-    }
+
+
+    
 }
 
 void TestCase()
