@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Testing",
+            "request": "launch",
+            "mainClass": "Testing",
+            "projectName": "My Codes_c405cf94"
+        },
+        {
+            "type": "java",
             "name": "Launch Assignment1",
             "request": "launch",
             "mainClass": "Assignment1",
@@ -41,6 +48,10 @@
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
+            // "linux": {
+                // "MIMode": "gdb",
+                // "miDebuggerPath": "/usr/bin/gdb"
+                // },
             "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe",
