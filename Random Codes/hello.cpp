@@ -59,22 +59,10 @@ void FindPrime(bool* prime, int N) {
     }
 }
 
-void ans(VI &arr, int n)
-{
-
-    for(int i = 0; i< arr.size(); i++)
-    {
-        
-    }
-}
-
 void solve()
 {
-    int n = 3;
-    vector<int> arr = {1, 2, 3};
-    vector<VI> ans;
-
-    ans(arr, n);
+    int i = 5;
+    cout<<"Enter weight and value for element "<< i+1<<": ";
 }
 
 void TestCase()
@@ -87,8 +75,8 @@ void TestCase()
 
 int main()
 {
-    Mentor();
-    YOURMENTOR
+    // Mentor();
+    // YOURMENTOR
     //bool prime[N];
     //FindPrime(prime, N);
     // TestCase();

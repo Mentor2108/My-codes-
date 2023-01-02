@@ -9,6 +9,11 @@
 #define FOR(i, n, k) for(int i = 0; i<n; i+=k)
 #define endl "\n"
 #define PB push_back
+#define F first
+#define S second
+#define VI vector<int>
+#define PII pair<int, int>
+#define VPII vector<pair<int, int>>
 
 //const int N = ;
 
@@ -33,7 +38,7 @@ ll Fastpow(ll base, ll pow) {
     return res * res;
 }
 
-void FindPrime(int* prime, int N) {
+void FindPrime(bool* prime, int N) {
     for (int i = 1; i <= N; i++) {
         prime[i] = 1;
     }
@@ -56,19 +61,93 @@ void FindPrime(int* prime, int N) {
 
 void solve()
 {
-    //int prime[N];
-    //FindPrime(prime, N);
     int n, m;
     cin>>n>>m;
-    int x1, x2, y1, y2;
+    vector<VI> a(n+1, VI(m+1, 0));
+    int x1, y1, x2, y2;
+    int ans = 2, parity1 = -1, parity2 = -1;
     cin>>x1>>y1>>x2>>y2;
-    int a[n+1][m+1] = {};
+    parity1 = (x1 + y1)%2;
+    parity2 = (x2 + y2)%2;
+    if (parity1 == parity2 && parity1 == 1)
+        ans = 3;
+    else if (parity1 == parity2 && parity1 == 0)
+        ans = 4;
+    else if (parity1 == 1)
+        ans = 2;
+    else 
+        ans = 1;
+    if (ans == 3)
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j<=m; j++)
+            {
+                if ((i+j)%2 == 1)
+                {
+                    a[i][j] = 1;
+                }
+                else   
+                    a[i][j] = 3;
+            }
+        }
+    }
+    else if (ans == 4)
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j<=m; j++)
+            {
+                if ((i+j)%2 == 0)
+                {
+                    a[i][j] = 1;
+                }
+                else   
+                    a[i][j] = 3;
+            }
+        }
+    }
+    else if (ans == 2)
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j<=m; j++)
+            {
+                if ((i+j)%2 == 1)
+                {
+                    a[i][j] = 1;
+                }
+                else   
+                    a[i][j] = 2;
+            }
+        }
+    }
+    else
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j<=m; j++)
+            {
+                if ((i+j)%2 == 1)
+                {
+                    a[i][j] = 2;
+                }
+                else   
+                    a[i][j] = 1;
+            }
+        }        
+    }
     a[x1][y1] = 1;
     a[x2][y2] = 2;
-    // if(x1<x2)
-    // {
-    //     if (y1<y2)
-    // }
+    for(int i = 1; i<=n; i++)
+    {
+        for (int j = 1; j<=m; j++)
+        {
+            cout<<a[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    
 }
 
 void TestCase()
@@ -83,6 +162,8 @@ int main()
 {
     Mentor();
     YOURMENTOR
+    //bool prime[N];
+    //FindPrime(prime, N);
     TestCase();
     //solve();
     return 0;
