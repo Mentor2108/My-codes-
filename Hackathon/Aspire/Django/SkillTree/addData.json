@@ -1,0 +1,55 @@
+{
+    "_id": { "$oid": "64647726fc69862863915e60" },
+    "name": "Full Stack",
+    "attributes": { "id": "fullstack" },
+    "children": [
+      {
+        "name": "Backend",
+        "attributes": { "id": "backend" },
+        "children": [
+          {
+            "name": "NodeJS",
+            "attributes": { "id": "nodejs" },
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Frontend",
+        "attributes": { "id": "frontend" },
+        "children": [
+          {
+            "name": "ReactJS",
+            "attributes": { "id": "reactjs" },
+            "children": []
+          },
+          {
+            "name": "CSS",
+            "attributes": { "id": "css" },
+            "children": []
+          },
+          {
+            "name": "HTML",
+            "attributes": { "id": "html" },
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Database",
+        "attributes": { "id": "database" },
+        "children": [
+          {
+            "name": "SQL/MongoDB",
+            "attributes": { "id": "sql" },
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Github",
+        "attributes": { "id": "github" },
+        "children": []
+      }
+    ]
+  }

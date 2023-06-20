@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'SkillTree',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,10 +76,17 @@ WSGI_APPLICATION = 'AspireSkillTree.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': "DirectedGraph",
+        # "HOST": "localhost",
+        # "PORT": 8000,
+        # "USER": "mentor",
+        # "PASSWORD":"KNKQDkT_Zi2P.r9",
+        'CLIENT': {
+            "host": "mongodb+srv://mentor:KNKQDkT_Zi2P.r9@mentoring-cluster.egmyda9.mongodb.net/"
+        }
     }
-}
+} 
 
 
 # Password validation
