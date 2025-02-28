@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: auth
+  cloud:
+    config:
+      enabled: false
+    feign:
+      discovery:
+        enabled: true
+    openfeign:
+      circuitbreaker:
+        enabled: true
+server:
+  port: 6869
+
+eureka:
+#  instance:
+#    prefer-ip-address: true
+  client:
+    enabled: true
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+
+feign:
+  circuitbreaker:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 160000000
+        readTimeout: 160000000
+
+security:
+  jwt:
+    expiration-time: 3600000
+
+logging:
+  group:
+    base-package: com.adp
+  level:
+    base-package: DEBUG
+#    org.springframework.cloud.netflix.eureka: DEBUG
+#    feign:
+#      client:
+#        config:
+#          default: DEBUG

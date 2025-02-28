@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    environment {
+        CI = false
+    }
+    stages {
+        stage('Install Packages') {
+            steps {
+                bat 'npm install --force --save'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                echo 'Run Tests'
+            }
+        }
+   
+        stage('Create Build Artifacts') {
+            steps {
+                bat 'npm run build'
+            }
+        }
+    
+        stage('Docker Build') {
+            steps {
+                echo 'Docker Build'
+                bat 'docker build -t docker.repository.esi.adp.com/clientcentral/training/adp-batch2-2024-team1-frontend -f Dockerfile .'
+            }
+        }
+    
+        stage('Docker Push'){
+            steps {
+                bat 'docker push docker.repository.esi.adp.com/clientcentral/training/adp-batch2-2024-team1-frontend'
+            }
+        }
+        
+        // stage('Docker deploy'){
+        //     steps {
+        //         bat 'docker run -itd -p 3000:3000 docker.repository.esi.adp.com/clientcentral/training/adp-batch2-2024-team1-frontend'
+        //     }
+        // }
+    } 
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/logo.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Capstone Project website for expense management" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.svg" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>Expense Management</title>
+  <script src="https://synerg.adp.com/config/synerg-config.js"></script>
+  <!-- only required if using sfc components -->
+  <script src="https://synerg.adp.com/features/config/synerg-config.js"></script>
+  <!-- only required if using sdfx components -->
+  <script src="https://synerg.adp.com/sdfx/config/sdfx-config.js"></script>
+  <script>
+    Promise.all([
+      window.SynergConfig.initialize(),
+      // only required if using sfc components
+      window.SynergFeaturesConfig.initialize({ baseUrl: 'https://synerg.adp.com/features' }),
+      // only required if using sdfx components
+      window.SDFXConfig.initialize({ baseUrl: 'https://synerg.adp.com/sdfx'})
+    ]).then((cfgs) => {
+      const sdfCfg = cfgs[0];
+      // Now load the global styles for the default theme
+      // and the sdf utility classes
+      return sdfCfg.loadGlobalStyles(['sdf-global', 'sdf-utilities']);
+    }).then(() => {
+    });
+  </script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+</body>
+
+</html>

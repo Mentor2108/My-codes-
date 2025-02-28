@@ -1,0 +1,16 @@
+.ag-theme-quartz,
+.ag-theme-quartz-dark {
+    --ag-foreground-color: rgb(132, 113, 46);
+    --ag-background-color: rgb(253, 255, 247);
+    --ag-header-foreground-color: rgb(28, 22, 101);
+    --ag-header-background-color: rgb(245, 242, 255);
+    --ag-odd-row-background-color: rgba(115, 54, 54, 0.03);
+    --ag-header-column-resize-handle-color: rgb(35, 35, 35);
+    --ag-font-size: 17px;
+    .ag-header-cell-label {
+        justify-content: center;
+    }
+    --ag-font-family: var(--sdf-context-ui-typography-base-css-font-family, Circular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif);
+    --ag-borders:none;
+    --ag-grid-size: 10px;
+}

@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: expense-management
+  cloud:
+    feign:
+      discovery:
+        enabled: true
+    openfeign:
+      circuitbreaker:
+        enabled: true
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 5000
+            loggerLevel: basic
+    #    loadbalancer:
+    #       ribbon:
+    #        enable: false
+
+server:
+  port: 6969
+
+eureka:
+  client:
+    enabled: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      sampleService:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+        eventConsumerBufferSize: 10
+
+
+logging:
+  group:
+    base-package: com.adp
+  level:
+    base-package: DEBUG

@@ -1,0 +1,57 @@
+server:
+  port: 6769
+
+spring:
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000/"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowCredentials: true
+      routes:
+        - id: auth-service-route
+          uri: lb://AUTH
+          predicates:
+            - Path=/auth/**
+
+        - id: expense-management-service-route
+          uri: lb://EXPENSE-MANAGEMENT
+          predicates:
+            - Path=/api/**
+          filters:
+#            - AddRequestHeader=X-Authenticated-User, gauransh@adp.com
+#            - AddRequestHeader=X-User-Roles, USER
+            - JwtFilterFactory
+  application:
+    name: gateway
+
+eureka:
+  client:
+    enabled: true
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone : ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+
+security:
+  jwt:
+    expiration-time: 3600000
+
+logging:
+  group:
+    base-package: com.adp
+  level:
+    base-package: DEBUG
